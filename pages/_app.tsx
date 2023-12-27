@@ -5,7 +5,7 @@ import Layout from "@/components/pageRender/layout";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import { SWRConfig } from "swr";
-import { appWithTranslation } from "next-i18next";
+import { withTranslation, WithTranslation } from "react-i18next";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -34,4 +34,12 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default appWithTranslation(App);
+interface IProps extends WithTranslation {
+  prop: any;
+}
+
+interface IState {
+  state: any;
+}
+
+export default withTranslation()(App);
