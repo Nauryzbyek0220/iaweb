@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import RenderAtom from "@/components/common/atom/renderAtom";
 import WidgetWrapperContext, {
   WidgetWrapper,
@@ -6,7 +5,6 @@ import WidgetWrapperContext, {
 import { useState, useContext } from "react";
 import { Progress } from "antd";
 import _ from "lodash";
-import SmartCitySubContent from "./smartcitySubContent";
 
 import ErpArticle from "@/components/custom/article/erpArticle";
 
@@ -18,11 +16,14 @@ export default function InteractiveTabs() {
   const renderTabsData = widgetnemgooReady?.tabs;
   const defaultArticle = widgetnemgooReady?.defaultArticle;
 
-  let newArr = _.map(readyDatasrc, (o) => _.pick(o, ["categoryname"]));
-  let grouped = _.keys(_.mapValues(_.groupBy(newArr, "categoryname")));
-
   return (
     <div className="flex flex-col w-full">
+      {/* <div className="flex container justify-center items-center mx-auto py-10 md:py-20">
+        <ErpArticle
+          pDataSrc={defaultArticle?.data}
+          pOptions={defaultArticle?.options}
+        />
+      </div> */}
       <div className="hidden relative sm:flex flex-row gap-[30px] container mx-auto pb-10">
         {renderTabsData?.map((item: any, index: number) => {
           return (
@@ -90,52 +91,6 @@ export default function InteractiveTabs() {
           </div>
         )}
       </div>
-
-      {activeTab == "001" && (
-        <div className="flex flex-col gap-y-[80px]">
-          {grouped?.map((item: any, index: number) => {
-            const dataSrc = readyDatasrc?.filter((obj: any) => {
-              return obj?.categoryname === item;
-            });
-            return (
-              <div key={index} className="grid grid-cols-3 gap-[30px]">
-                <div className="text-[60px] font-bold text-[#3C3C3C] leading-[66px]">
-                  {item}
-                </div>
-                {dataSrc?.map((obj: any, rowIndex: number) => {
-                  return (
-                    <div key={rowIndex} className="flex flex-col gap-y-[10px] ">
-                      <RenderAtom
-                        item={{
-                          value: `https://dev.veritech.mn/${obj?.imgmiddlethumb}`,
-                        }}
-                        renderType="image"
-                        customClassName={
-                          "w-full h-[200px] object-cover rounded-[10px]"
-                        }
-                      />
-                      <RenderAtom
-                        item={{ value: obj?.title }}
-                        renderType="title"
-                        customClassName={"text-[20px] font-bold text-[#3C3C3C]"}
-                      />
-                      <RenderAtom
-                        item={{ value: obj?.description }}
-                        renderType="text"
-                        customClassName={
-                          "text-[16px] text-[#67748E] leading-[26px] line-clamp-2"
-                        }
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {activeTab == "002" && <SmartCitySubContent />}
     </div>
   );
 }

@@ -69,7 +69,8 @@ export default function InteractiveCompanyTimeline() {
                     <RenderAtom
                       renderType="image"
                       item={{
-                        value: "logo.svg",
+                        value:
+                          "https://res.cloudinary.com/dzih5nqhg/image/upload/v1696330036/Interactive_-_Eng-01_zbuozy.png",
                       }}
                       customClassName={"w-auto h-[40px]"}
                     />

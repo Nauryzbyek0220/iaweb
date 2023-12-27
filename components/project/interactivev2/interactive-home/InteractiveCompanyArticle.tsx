@@ -17,7 +17,8 @@ export default function InteractiveCompanyArticle() {
         <RenderAtom
           renderType="image"
           item={{
-            value: "/images/companyImg.png",
+            value:
+              "https://res.cloudinary.com/dzih5nqhg/image/upload/v1689839650/image_44342_ur9sr2.png",
           }}
           customClassName={"w-full lg:min-w-[570px] h-auto object-cover"}
         />
