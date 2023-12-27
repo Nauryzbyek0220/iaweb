@@ -38,6 +38,7 @@
     "react-code-blocks": "^0.1.4",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.0",
+    "react-i18next": "^14.0.0",
     "react-markdown": "^8.0.7",
     "react-use": "^17.4.0",
     "react-use-window-scroll": "^1.1.1",
