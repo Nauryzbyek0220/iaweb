@@ -826,15 +826,15 @@ export const mergeWidget = (widget, config, mainConfig) => {
 //   var escapedFind = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 //   return str.replace(new RegExp(escapedFind, "g"), replace);
 // }
-String.prototype.replaceAll = function (str1, str2, ignore) {
-  return this.replace(
-    new RegExp(
-      str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"),
-      ignore ? "gi" : "g"
-    ),
-    typeof str2 === "string" ? str2.replace(/\$/g, "$$$$") : str2
-  );
-};
+// String.prototype.replaceAll = function (str1, str2, ignore) {
+//   return this.replace(
+//     new RegExp(
+//       str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"),
+//       ignore ? "gi" : "g"
+//     ),
+//     typeof str2 === "string" ? str2.replace(/\$/g, "$$$$") : str2
+//   );
+// };
 
 //======================================== PROCESS IUNPUT JSON CREATER ===========================
 // kpi column name
@@ -1543,27 +1543,27 @@ export const getBrowser = (window) => {
 
 export function getSaveExprission(str, type) {
   var exprission = "";
-  if (type == "startAfterSave") {
-    str = str.toString().replaceAll("\r\n", "").replaceAll("\n", "");
-    var subStrs = str.match("startAfterSave(.*)endAfterSave");
-    if (!isEmpty(subStrs)) {
-      exprission = subStrs[1];
-    } else {
-      exprission = "back";
-    }
-  } else {
-    var Index = str.length;
-    if (type == "endAfterSave") {
-      if (!isEmpty(str.match("startAfterSave"))) {
-        Index = str.match("startAfterSave");
-      }
-    }
-    if (isObject(Index)) {
-      Index = Index.index;
-    }
-    var subStrs = str.substr(0, Index).replace(type, "");
-    exprission = subStrs;
-  }
+  // if (type == "startAfterSave") {
+  //   str = str.toString().replaceAll("\r\n", "").replaceAll("\n", "");
+  //   var subStrs = str.match("startAfterSave(.*)endAfterSave");
+  //   if (!isEmpty(subStrs)) {
+  //     exprission = subStrs[1];
+  //   } else {
+  //     exprission = "back";
+  //   }
+  // } else {
+  //   var Index = str.length;
+  //   if (type == "endAfterSave") {
+  //     if (!isEmpty(str.match("startAfterSave"))) {
+  //       Index = str.match("startAfterSave");
+  //     }
+  //   }
+  //   if (isObject(Index)) {
+  //     Index = Index.index;
+  //   }
+  //   var subStrs = str.substr(0, Index).replace(type, "");
+  //   exprission = subStrs;
+  // }
   return exprission;
 }
 
