@@ -36,7 +36,6 @@ const MainCard: FC<PropsType> = ({ options, data }) => {
   
   const lac_ecm_news = getdataSrc?.lac_ecm_news;
   const lacMap = lac_ecm_news || data;
-    console.log(getdataSrc);
     
   let newArr = _.map(data, (o) => _.pick(o, ["categorydesc"]));
   let grouped = _.keys(_.mapValues(_.groupBy(newArr, "categorydesc")));

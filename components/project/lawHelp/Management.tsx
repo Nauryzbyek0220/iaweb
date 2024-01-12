@@ -2,33 +2,60 @@ import { FC, useState } from "react";
 import RenderAtom from "@/components/common/atom/renderAtom";
 import Link from "next/link";
 import _ from "lodash";
+import useSWR from "swr";
+import { useRouter } from "next/router";
 
 type PropsType = {
     options?: any;
     data?: any;
   };
 const Management: FC<PropsType> = ({ options, data }) => {
-    
-    let newArr = _.map(data, (o) => _.pick(o, ["categorydesc"]));
-    let grouped = _.keys(_.mapValues(_.groupBy(newArr, "categorydesc")));
+
+    const router = useRouter();
+    const filterId = router.query?.id;
+    let idFilter = 17049685068529;
+    const command = "LAC_ECM_NEWS_DV_004";
+    const parameters = `&parameters=${JSON.stringify({
+      id: filterId,
+    })}`;
+    const { data: getdataSrc } = useSWR(
+      `/api/get-process?processcode=${command}${parameters}`
+    );
+
+    const lac_ecm_news = getdataSrc?.lac_ecm_news;
+    // let newArr = _.map(data, (o) => _.pick(o, ["categorydesc"]));
+    let newArr = _.map(lac_ecm_news, (o) => _.pick(o, ["title"]));
+    let grouped = _.keys(_.mapValues(_.groupBy(newArr, "title")));
     const [active, setActive] = useState(0);
-    const [filterItem, setFilterItem]: any = useState(grouped[0] || "Бүгд");
-  
+    const [filterItem, setFilterItem]: any = useState(grouped[0] || "Удирдлага");
+    
+    if (filterItem == "Удирдлага") {
+        idFilter = 17049685068529;
+      } else if (filterItem == "Хэлтсийн дарга") {
+        idFilter = 17034812168219;
+    }
+    
+    const parametersFilter = `&parameters=${JSON.stringify({
+        id: idFilter,
+    })}`;
+
+    const { data: getdataSrcFilter } = useSWR(
+        `/api/get-process?processcode=${command}${parametersFilter}`
+    );
+
+    const dataSrc = getdataSrcFilter?.lac_ecm_news;
+    console.log(dataSrc);
+    
     let filtered: any = [];
-    grouped.forEach((x) => {
-      if (!x.includes("null")) filtered.push(x);
+        grouped.forEach((x) => {
+        if (!x.includes("null")) filtered.push(x);
     });
-  
+
     const onFilterEvent = (e: any, item: any) => {
       e.preventDefault();
       setFilterItem(item);
     };
   
-    const selectdata = _.filter(data, {
-      categorydesc: filterItem,
-    });
-      
-    let dataSrc: any = filterItem !== "Бүгд" ? selectdata : data;
     return (
         <div className="container mx-auto">
             <div className="w-full flex col-span-12 container pt-[60px] pb-[85px]">
@@ -56,12 +83,12 @@ const Management: FC<PropsType> = ({ options, data }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pb-[80px]"> 
             {dataSrc?.map((item: any, index: number) => {
                 return (
-                <Link key={index} href={`about/management/detail?id=${item?.label}`}>
-                    <div className="flex flex-colrounded-[10px] p-1 bg-white">
-                        <div className="py-[36px] px-[24px]" style={{ backgroundImage: `url(/Vector.png)`, backgroundRepeat: "no-repeat", backgroundSize: "cover", }}>
+                <Link key={index} href={`about/management/detail?id=${item?.id}`}>
+                    <div className="flex flex-colrounded-[10px] p-1 bg-white h-full">
+                        <div className="py-[36px] px-[24px] w-full" style={{ backgroundImage: `url(/Vector.png)`, backgroundRepeat: "no-repeat", backgroundSize: "cover", }}>
                             <RenderAtom
                             renderType="image"
-                            item={{value: item.mainimage }}
+                            item={{value: item.imgurl}}
                             customClassName={
                                 "w-full h-[160px] cursor-pointer rounded-full"
                             }
@@ -78,7 +105,7 @@ const Management: FC<PropsType> = ({ options, data }) => {
                                 <span className="">Ажилласан жил</span>
                                 <RenderAtom
                                 renderType="text"
-                                item={{ value: item?.date}}
+                                item={{ value: item?.date || item?.body}}
                                 customClassName="mx-auto"
                                 />
                             </div>

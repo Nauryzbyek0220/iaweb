@@ -22,8 +22,6 @@ const LawArticle: FC<PropsType> = ({ data }) => {
     const { data: getdataSrc } = useSWR(
       `/api/get-process?processcode=${command}${parameters}`
     );
-
-    console.log(getdataSrc);
     
     return(
         <>
