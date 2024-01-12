@@ -66,18 +66,22 @@ const LawArticle: FC<PropsType> = ({ data }) => {
                   </div>
                 )}
 
-              {getdataSrc?.imgurl && (
-                <RenderAtom
-                  item={{ value: getdataSrc?.imgurl }}
-                  renderType="image"
-                  customClassName="w-full rounded-xl pt-5"
-                />
-              ) || staticData?.image && (
-                <RenderAtom
-                  item={{ value: staticData?.image }}
-                  renderType="image"
-                  customClassName="w-full rounded-xl pt-5"
-                />
+              {filterId != "17049685221219" && ( 
+                <>
+                  {getdataSrc?.imgurl && (
+                  <RenderAtom
+                    item={{ value: getdataSrc?.imgurl }}
+                    renderType="image"
+                    customClassName="w-full rounded-xl pt-5"
+                  />
+                ) || staticData?.image && (
+                  <RenderAtom
+                    item={{ value: staticData?.image }}
+                    renderType="image"
+                    customClassName="w-full rounded-xl pt-5"
+                  />
+                )}
+                </>
               )}
         </>
     );
