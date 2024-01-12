@@ -43,12 +43,12 @@ const MainHeader: FC<PropsType> = ({ config, dataSrc, options, position }) => {
                   >
                     <span
                       className={`text-[14px] font-normal cursor-pointer hover:text-[#FFCD02] leading-[20px] text-[#003378] hover:font-bold
-                                        ${
-                                          activeMenu === row?.url
-                                            ? "text-[#FFC107] border-[#FFC107]"
-                                            : "border-transparent"
-                                        }
-                                        `}
+                        ${
+                          activeMenu === row?.url
+                            ? "text-[#FFC107] border-[#FFC107]"
+                            : "border-transparent"
+                        }
+                      `}
                     >
                       {row?.title}
                     </span>
@@ -101,6 +101,7 @@ const MainHeader: FC<PropsType> = ({ config, dataSrc, options, position }) => {
                     key={index}
                     item={row?.title}
                     customProps={row?.props}
+                    id={row?.id}
                     href={row?.url}
                     customClassName={`text-[16px] cursor-pointer leading-[20px] pr-[5px] ${
                       activeMenu === row?.url

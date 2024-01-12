@@ -15,6 +15,7 @@ import News from "./News";
 import NewsDetail from "./newsdetail";
 import Contact from "./Contact";
 import ContactDetail from "./ContactDetail";
+import useSWR from "swr";
 
 type PropsType = {
   options?: any;
@@ -22,6 +23,21 @@ type PropsType = {
 };
 
 const MainCard: FC<PropsType> = ({ options, data }) => {
+  const router = useRouter();
+  const filterId = router.query?.id;
+  const command = "LAC_ECM_NEWS_DV_004";
+  const parameters = `&parameters=${JSON.stringify({
+    id: filterId,
+  })}`;
+
+  const { data: getdataSrc } = useSWR(
+    `/api/get-process?processcode=${command}${parameters}`
+  );
+  
+  const lac_ecm_news = getdataSrc?.lac_ecm_news;
+  const lacMap = lac_ecm_news || data;
+    console.log(getdataSrc);
+    
   let newArr = _.map(data, (o) => _.pick(o, ["categorydesc"]));
   let grouped = _.keys(_.mapValues(_.groupBy(newArr, "categorydesc")));
   const [active, setActive] = useState(0);
@@ -180,27 +196,26 @@ const MainCard: FC<PropsType> = ({ options, data }) => {
           <div className="pb-[80px] container mx-auto md:flex flex-row">
             <div className="w-full md:w-6/12 md:pb-0 pb-3">
               <div className="flex content-center">
-                <Image
-                  src={"/lawHelp.png"}
-                  alt="logo"
-                  width={364}
-                  height={364}
+                <RenderAtom
+                  renderType="image"
+                  item={{ value: getdataSrc?.imgurl }}
+                  customClassName={"max-w-[364px] max-h-[364px] min-w-[364px] min-h-[364px]"}
                 />
               </div>
             </div>
             <div className="flex flex-col w-full md:w-1/2 md:py-3 sm:py-1 xs:py-0 my-auto">
-              {data?.map((item: any, index: number) => {
+              {lacMap?.map((item: any, index: number) => {
                 return (
                   <div className="flex flex-col justify-center" key={index}>
                     <RenderAtom
-                      item={{ value: item?.subTitle }}
+                      item={{ value: item?.title }}
                       renderType="title"
                       customClassName={
                         "lg:text-[32px] sm:text-[28px] xs:text-[24px] lg:font-bold sm:font-medium xs:font-normal text-[#003378]"
                       }
                     />
                     <RenderAtom
-                      item={{ value: item?.description }}
+                      item={{ value: item?.body }}
                       renderType="title"
                       customClassName={
                         "lg:text-[16px] sm:text-[14px] xs:text-[12px] text-[#3C3C3C] leading-[162%] py-5"
