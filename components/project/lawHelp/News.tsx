@@ -118,7 +118,7 @@ const News: FC<PropsType> = ({ options, data }) => {
                     let re = /(?:\.([^.]+))?$/;
                     let ext = re.exec(item.mainimg);  
                     return (
-                        <div className="flex flex-col bg-white rounded-[10px]">
+                        <div key={index} className="flex flex-col bg-white rounded-[10px]">
                             {item.mainimg && (
                                 <div className="flex-none w-full h-[195px]">
                                     <RenderAtom
