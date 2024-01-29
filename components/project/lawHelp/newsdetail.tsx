@@ -40,6 +40,9 @@ const Newsdetail: FC<PropsType> = ({ options, data}) => {
     const { data: getdataSrc } = useSWR(
         `/api/get-process?processcode=${command}${parameters}`
     );
+   
+    let re = /(?:\.([^.]+))?$/;
+    let ext = re.exec(getdataSrc?.imgurl);  
     
     const onFilterEvent = (e: any, item: any) => {
         e.preventDefault();
@@ -103,6 +106,24 @@ const Newsdetail: FC<PropsType> = ({ options, data}) => {
                             "w-full h-auto cursor-pointer rounded-lg py-3"
                             }
                         />
+
+                            {getdataSrc?.imgurl && (
+                                 <RenderAtom
+                                 renderType="image"
+                                 item={{value: `${ext?.[0] === ".pdf" ? "https://dev.veritech.mn/storage/uploads/process/202401/file_1704250609504314_17037094337197351.jpg" : getdataSrc?.imgurl}`}}
+                                 customClassName={
+                                 "w-full h-auto cursor-pointer rounded-lg py-3"
+                                 }
+                             />
+                            ) || (
+                                <RenderAtom
+                                renderType="image"
+                                item={{ value: getdataSrc?.imgurl }}
+                                customClassName={
+                                "w-full h-auto cursor-pointer rounded-lg py-3"
+                                }
+                            />
+                            )}  
                         </div>
                         <div className="bg-[#ffffff] rounded-xl p-5 mt-2">
                             <form onSubmit={handleSubmit(onSubmit)}>
