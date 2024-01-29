@@ -127,7 +127,7 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
                         
                             {data?.map((item: any, index: number) => {
                                 return (
-                            <>
+                            <div key={index}>
                                 {item?.comment?.map((item: any, index: number) => {
                                     return (
                                     <div key={index} className="border-b last:border-none">
@@ -155,7 +155,7 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
                                     </div>
                                     );
                                 })}
-                                </>
+                                </div>
                                 )
                             })}
                         
