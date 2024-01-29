@@ -17,15 +17,15 @@ type PropsType = {
   data?: any;
 };
 
-// const schema = yup
-//   .object({
-//     newlink: yup
-//       .string()
-//       .email("Имэйл буруу байна ")
-//       .max(255)
-//       .required("Имэйл хаяг оруулна уу"),
-//   })
-//   .required();
+const schema = yup
+  .object({
+    newlink: yup
+      .string()
+      .email("Имэйл буруу байна ")
+      .max(255)
+      .required("Имэйл хаяг оруулна уу"),
+  })
+  .required();
 
 const newsDetail: FC<PropsType> = ({ options, data}) => {
   
@@ -39,39 +39,39 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
     const { data: getdataSrc } = useSWR(
         `/api/get-process?processcode=${command}${parameters}`
     );
-    // const onFilterEvent = (e: any, item: any) => {
-    //     e.preventDefault();
-    // };
+    const onFilterEvent = (e: any, item: any) => {
+        e.preventDefault();
+    };
 
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     reset,
-    //     formState: { errors },
-    //     // eslint-disable-next-line react-hooks/rules-of-hooks
-    // } = useForm({
-    //     resolver: yupResolver(schema),
-    // });
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
-    // const onSubmit = async (data: any) => {
-    //     const param = {
-    //     typeId: "1",
-    //     ...data,
-    //     };
+    const onSubmit = async (data: any) => {
+        const param = {
+        typeId: "1",
+        ...data,
+        };
 
-    //     const { data: submitData } = await axios.post(`/api/post-process`, {
-    //     processcode: "IMN_GET_EMAIL_DV_001",
-    //     parameters: param,
-    //     });
+        const { data: submitData } = await axios.post(`/api/post-process`, {
+        processcode: "IMN_GET_EMAIL_DV_001",
+        parameters: param,
+        });
 
-    //     if (submitData?.status == "success") {
-    //     notification.success({
-    //         message: "Бидэнтэй нэгдсэнд баярлалаа.",
-    //         placement: "bottom",
-    //     });
-    //     reset();
-    //     }
-    // };
+        if (submitData?.status == "success") {
+        notification.success({
+            message: "Бидэнтэй нэгдсэнд баярлалаа.",
+            placement: "bottom",
+        });
+        reset();
+        }
+    };
 
     return (
         <div className="pt-[60px] pb-[78px] container mx-auto">
@@ -102,7 +102,7 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
                             }
                         />
                         </div>
-                        {/* <div className="bg-[#ffffff] rounded-xl p-5 mt-2">
+                        <div className="bg-[#ffffff] rounded-xl p-5 mt-2">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="text-[18px] text-[#003378] font-bold">
                                 <span>Сэтгэгдэл</span>
@@ -159,7 +159,7 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
                                 )
                             })}
                         
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
