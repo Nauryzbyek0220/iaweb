@@ -27,10 +27,11 @@ const schema = yup
   })
   .required();
 
-const newsDetail: FC<PropsType> = ({ options, data}) => {
+const NewsDetail: FC<PropsType> = ({ options, data}) => {
   
     const router = useRouter();
     const filterId = router.query?.id;
+   
     const command = "LAC_ECM_NEWS_DV_004";
     const parameters = `&parameters=${JSON.stringify({
         id: filterId,
@@ -39,6 +40,7 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
     const { data: getdataSrc } = useSWR(
         `/api/get-process?processcode=${command}${parameters}`
     );
+    
     const onFilterEvent = (e: any, item: any) => {
         e.preventDefault();
     };
@@ -166,4 +168,4 @@ const newsDetail: FC<PropsType> = ({ options, data}) => {
         </div>
     );
 };
-export default newsDetail;
+export default NewsDetail;
