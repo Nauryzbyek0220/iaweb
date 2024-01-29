@@ -27,7 +27,7 @@ const schema = yup
   })
   .required();
 
-const NewsDetail: FC<PropsType> = ({ options, data}) => {
+const Newsdetail: FC<PropsType> = ({ options, data}) => {
   
     const router = useRouter();
     const filterId = router.query?.id;
@@ -168,4 +168,4 @@ const NewsDetail: FC<PropsType> = ({ options, data}) => {
         </div>
     );
 };
-export default NewsDetail;
+export default Newsdetail;

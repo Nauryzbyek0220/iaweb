@@ -12,7 +12,7 @@ import Legal from "./Legal";
 import Management from "./Management";
 import LawHomeTable from "./lawHomeTable";
 import News from "./News";
-import NewsDetail from "./newsdetail";
+import NewsDetail from "./Newsdetail";
 import Contact from "./Contact";
 import ContactDetail from "./ContactDetail";
 import useSWR from "swr";
