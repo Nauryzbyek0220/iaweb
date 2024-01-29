@@ -3,12 +3,12 @@ import React from "react";
 import _ from "lodash";
 import RenderAtom from "@/components/common/atom/renderAtom";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import * as yup from "yup";
 import { notification } from "antd";
-import useSWR from "swr";
 
 
 import Link from "next/link";
@@ -27,8 +27,18 @@ const schema = yup
   })
   .required();
 
-const newsDetail: FC<PropsType> = ({ options, data }) => {
-    
+const newsDetail: FC<PropsType> = ({ options, data}) => {
+  
+    const router = useRouter();
+    const filterId = router.query?.id;
+    const command = "LAC_ECM_NEWS_DV_004";
+    const parameters = `&parameters=${JSON.stringify({
+        id: filterId,
+    })}`;
+
+    const { data: getdataSrc } = useSWR(
+        `/api/get-process?processcode=${command}${parameters}`
+    );
     const onFilterEvent = (e: any, item: any) => {
         e.preventDefault();
     };
@@ -63,17 +73,6 @@ const newsDetail: FC<PropsType> = ({ options, data }) => {
         }
     };
 
-    const router = useRouter();
-    const filterId = router.query?.id;
-    const command = "LAC_ECM_NEWS_DV_004";
-    const parameters = `&parameters=${JSON.stringify({
-      id: filterId,
-    })}`;
-    const { data: getdataSrc } = useSWR(
-      `/api/get-process?processcode=${command}${parameters}`
-    );
-        
-    
     return (
         <div className="pt-[60px] pb-[78px] container mx-auto">
             <div className="flex">
