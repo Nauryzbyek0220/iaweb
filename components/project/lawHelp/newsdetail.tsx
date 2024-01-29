@@ -82,7 +82,6 @@ const Newsdetails: FC<PropsType> = ({ options, data}) => {
         <div className="pt-[60px] pb-[78px] container mx-auto">
             <div className="flex">
                 <div className="w-full">
-                    <p>test</p>
                     <div className="flex-col">
                         <div className="bg-[#ffffff] rounded-xl p-5 mb-2">
                         <RenderAtom
