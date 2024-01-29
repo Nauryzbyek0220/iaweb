@@ -37,7 +37,7 @@ const MainHeader: FC<PropsType> = ({ config, dataSrc, options, position }) => {
                 return (
                   <Link
                     key={index}
-                    href={row?.url}
+                    href={`${row?.url}?id=${row.id}`}
                     target={row?.props}
                     className="py-2.5 px-5"
                   >
@@ -102,7 +102,7 @@ const MainHeader: FC<PropsType> = ({ config, dataSrc, options, position }) => {
                     item={row?.title}
                     customProps={row?.props}
                     id={row?.id}
-                    href={row?.url}
+                    href={`${row?.url}`}
                     customClassName={`text-[16px] cursor-pointer leading-[20px] pr-[5px] ${
                       activeMenu === row?.url
                         ? "text-[#FFC107] border-[#FFC107]"

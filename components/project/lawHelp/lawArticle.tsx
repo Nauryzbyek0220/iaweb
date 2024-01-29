@@ -51,19 +51,6 @@ const LawArticle: FC<PropsType> = ({ data }) => {
                   />
               )}
 
-                {staticData?.data && (
-                  <div className={`list-styled ${
-                    options?.classNameDesc}`}>
-                    <ul>
-                      {staticData?.data?.map((item: any, index: number) => {
-                          return (
-                              <li key={index}> {item?.text }</li>
-                          );
-                      })}
-                    </ul>
-                  </div>
-                )}
-
               {filterId != "17049685221219" && ( 
                 <>
                   {getdataSrc?.imgurl && (

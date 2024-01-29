@@ -23,7 +23,7 @@ const Management: FC<PropsType> = ({ options, data }) => {
     );
 
     const lac_ecm_news = getdataSrc?.lac_ecm_news;
-    // let newArr = _.map(data, (o) => _.pick(o, ["categorydesc"]));
+    
     let newArr = _.map(lac_ecm_news, (o) => _.pick(o, ["title"]));
     let grouped = _.keys(_.mapValues(_.groupBy(newArr, "title")));
     const [active, setActive] = useState(0);
@@ -44,7 +44,6 @@ const Management: FC<PropsType> = ({ options, data }) => {
     );
 
     const dataSrc = getdataSrcFilter?.lac_ecm_news;
-    console.log(dataSrc);
     
     let filtered: any = [];
         grouped.forEach((x) => {
@@ -90,7 +89,7 @@ const Management: FC<PropsType> = ({ options, data }) => {
                             renderType="image"
                             item={{value: item.imgurl}}
                             customClassName={
-                                "w-full h-[160px] cursor-pointer rounded-full"
+                                "w-full h-[160px] cursor-pointer rounded-[50%]"
                             }
                             />
                             <div className="py-5 text-center">

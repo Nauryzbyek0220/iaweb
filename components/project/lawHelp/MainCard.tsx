@@ -62,65 +62,6 @@ const MainCard: FC<PropsType> = ({ options, data }) => {
 
   const content = () => {
     switch (settings?.style) {
-      case "bestCard":
-        return (
-          <div className="py-10 px-5">
-            {data?.map((item: any, index: number) => {
-              return (
-                <div
-                  key={index}
-                  className="flex flex-col md:flex-row justify-between mt-2"
-                >
-                  <div className="relative w-full md:w-1/2 px-6 md:py-3 sm:py-1  xs:py-0 col-span-6">
-                    <RenderAtom
-                      renderType="image"
-                      customClassName={
-                        "w-full md:min-h-[167px]  h-full rounded-t-lg md:rounded-l-lg"
-                      }
-                      item={{
-                        value: item?.mainimage,
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col w-full md:w-1/2 px-6 md:py-3 sm:py-1  xs:py-0 mb-0 mt-auto">
-                    <div className="flex flex-col justify-center py-5">
-                      <RenderAtom
-                        item={{
-                          value: item?.title,
-                        }}
-                        renderType="title"
-                        customClassName={
-                          "lg:text-[40px] sm:text-[36px] xs:text-[32px] lg:font-bold sm:font-medium xs:font-normal leading-[115%] text-[#003378] line-clamp-3"
-                        }
-                      />
-                      <RenderAtom
-                        item={{
-                          value: item?.description,
-                        }}
-                        renderType="title"
-                        customClassName={
-                          "lg:text-[16px] sm:text-[14px] xs:text-[12px] text-[#3C3C3C] leading-[162%] line-clamp-2 py-5"
-                        }
-                      />
-                    </div>
-                    <Link key={index} target={item?.props} href={item?.url}>
-                      <RenderAtom
-                        item={{
-                          value: item?.button,
-                        }}
-                        renderType="button"
-                        customClassName={
-                          "bg-[#003378] hover:bg-[#0E430D] text-white font-normal md:px-[30px] px-7 py-3.5 rounded-[30px] md:text-[18px] text-[16px] leading-[22px]"
-                        }
-                      />
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        );
-
       case "grid":
         return <News data={data} options={options} />;
       case "card":
